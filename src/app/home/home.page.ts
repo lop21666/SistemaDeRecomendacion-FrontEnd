@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { Pelicula } from '../interfaces/interfaces';
 import { MoviesService } from '../services/services/movies.service';
 import { PeliculaPage } from '../pelicula/pelicula.page';
@@ -22,7 +22,8 @@ export class HomePage implements OnInit{
   peliculasRecientes: Pelicula[] = [];
   pelicularPopulares: Pelicula[] = [];
 
-  constructor(private moviesService: MoviesService, private modalController: ModalController) {}
+  constructor(private moviesService: MoviesService, private modalController: ModalController,
+              private loadingController: LoadingController) {}
 
   ngOnInit() {
     this.moviesService.getFeature()
@@ -54,6 +55,13 @@ export class HomePage implements OnInit{
       componentProps: { pelicula }
     });
     await modal.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando...'
+    });
+    await loading.present();
   }
 
 }
