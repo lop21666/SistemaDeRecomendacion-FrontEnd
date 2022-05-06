@@ -39,6 +39,9 @@ export class MoviesService {
     return this.ejecutarQuery<RespuestaCredits>(`/search/movie?&query=${clave}&page=1`);
   }
 
+  searchPelícula(clave: string){
+    return this.ejecutarQuery<RespuestaCredits>(`/search/movie?&query=${clave}&page=1`);
+  }
 
   private ejecutarQuery<T>(query: string){
     query = url + query;
