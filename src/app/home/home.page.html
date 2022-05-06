@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="menuId" class="icon-menu" style="color:#3197f7;"></ion-menu-button>
+    </ion-buttons>
+    <ion-img src="../../assets/img/Logo Filmy.png" style="width: 45%; padding: 13px;"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card style="margin-bottom: -15px;">
+    <ion-slides [options]="slideOpts">
+  
+      <ion-slide *ngFor="let pelicula of pelicularPopulares" (click)="presentModalPelicula(pelicula)">
+        <ion-row>
+            <ion-card>
+              <img src='{{pelicula.poster_path | imagen}}' class="poster"/>
+            </ion-card>
+        </ion-row>
+      </ion-slide>
+    
+      <ion-slide class="slide-mas" (click)="cargarMas()">
+        <ion-button expand='full' size='full'  class="btn-mas">
+          <ion-icon name="add" slot="icon-only">
+          </ion-icon>
+        </ion-button>
+      </ion-slide>
+    
+    </ion-slides>
+  </ion-card>
+
+  
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size='0.5'>
+      </ion-col>
+      <ion-col>
+        <h3 style="font-family: muli; font-size: 27px;">Peliculas Estreno</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card style="margin-top: -5px; margin-bottom: -15px;">
+    <ion-slides [options] = 'slideOpts'>
+      <ion-slide *ngFor="let pelicula of peliculasRecientes">
+        <ion-card (click)="presentModalPelicula(pelicula)">
+          <img src='{{pelicula.backdrop_path | imagen }}' />
+          <ion-card-content>
+            <ion-card-title style="font-size: 18px;">{{pelicula.title}}</ion-card-title>
+            <p>
+    
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </ion-card>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size='0.5'>
+      </ion-col>
+      <ion-col>
+        <h3 style="font-family: muli; font-size: 27px;">Peliculas Populares</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card style="margin-top: -5px;">
+    <ion-slides [options] = 'slideOpts2'>
+      <ion-slide *ngFor="let pelicula of peliculasRecientes">
+        <ion-card (click)="presentModalPelicula(pelicula)">
+          <img src='{{pelicula.poster_path | imagen}}' class='poster'/>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </ion-card>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light" class="width">
+      <ion-icon name="apps"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">  
+      <ion-fab-button routerLink="/reset-password" color="light" class="width" style="zoom: 1.3;">
+        <ion-icon name="log-out-outline" style="zoom:1.2;"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button routerLink="/perfil" color="light" class="width" style="zoom: 1.3;">
+        <ion-icon name="person-circle" style="zoom:1.2;"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button routerLink="/search" color="light" class="width" style="zoom: 1.3;">
+        <ion-icon name="search" style="zoom:1.2;"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

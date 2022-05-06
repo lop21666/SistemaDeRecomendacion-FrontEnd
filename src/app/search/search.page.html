@@ -1,0 +1,45 @@
+<ion-header class="animate__animated animate__fadeIn">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" color="dark">Atrás
+        <ion-icon slot="start" name="arrow-back-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Buscar película</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-list>
+      <ion-item mode="md">
+        <ion-icon slot="start" name="videocam"></ion-icon>
+        <ion-input placeholder="Película..." type="text" clearOnEdit="true" clearInput [(ngModel)]="pelicula">
+        </ion-input>
+      </ion-item>
+      <ion-row style="margin-top: -25px;">
+        <ion-col size="3">
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" style="--background: #36acf5; margin-top: 35px;" (click)="search()"><b>Buscar</b></ion-button>
+        </ion-col>
+        <ion-col size="3">
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ion-card>
+
+  <br>
+
+  <ion-card *ngFor="let pelicula of peliculas" (click)="presentModalPelicula(pelicula)">
+    <img src='{{pelicula.backdrop_path | imagen }}' />
+    <ion-card-content>
+      <ion-card-title style="font-size: 18px;">{{pelicula.title}}</ion-card-title>
+      <p>
+
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

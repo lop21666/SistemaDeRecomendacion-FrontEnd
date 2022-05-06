@@ -1,0 +1,6 @@
+{
+	"appId": "uvg.app.filmy",
+	"appName": "Filmy",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
