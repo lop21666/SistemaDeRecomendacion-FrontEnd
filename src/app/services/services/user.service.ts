@@ -26,7 +26,7 @@ export class UserService {
     const body=JSON.stringify(params);
     console.log(body);
 
-    return this.http.post(this.url + '/register', body,{headers});
+    return this.http.post(this.url + '/createUser', body,{headers});
   }
 
 }
