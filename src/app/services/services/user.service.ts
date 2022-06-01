@@ -7,14 +7,18 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-
+  url = "http://localhost:3000"
   data = null;
   datosUsuario;
 
   constructor( private http: HttpClient) { }
 
-  login<T>( usu, password){
+  login<T>(params){
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify(params);
+    console.log(body)
 
+    return this.http.post(this.url + '/login', body,{'headers':headers})
   }
 
 }
