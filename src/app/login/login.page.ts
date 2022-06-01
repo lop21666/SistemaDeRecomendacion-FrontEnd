@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
 
     this.userService.login(params).subscribe((res: any)=>{
       if(res.message === undefined){
-        this.navCtrl.navigateRoot('/categorias');
+        this.navCtrl.navigateRoot('/home');
       }else{
         setTimeout(() => {
           this.loadingController.dismiss();

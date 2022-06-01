@@ -21,4 +21,12 @@ export class UserService {
     return this.http.post(this.url + '/login', body,{headers});
   }
 
+  register<T>(params){
+    const headers = { 'content-type': 'application/json'};
+    const body=JSON.stringify(params);
+    console.log(body);
+
+    return this.http.post(this.url + '/register', body,{headers});
+  }
+
 }
