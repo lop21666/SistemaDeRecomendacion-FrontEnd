@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { MoviesService } from '../services/services/movies.service';
 
 @Component({
@@ -11,9 +11,13 @@ export class CategoriasPage implements OnInit {
 
   generos;
 
-  constructor(private navCtrl: NavController, private moviesService: MoviesService) { }
+  constructor(private navCtrl: NavController, private moviesService: MoviesService, public loadingController: LoadingController) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.loadingController.dismiss();
+    }, 1000);
+
     this.moviesService.getGenres().subscribe((resp: any)=>{
       this.generos = resp;
     });
@@ -24,7 +28,7 @@ export class CategoriasPage implements OnInit {
   }
 
   selectGenre(ev){
-    console.log(ev.detail.value);
+    console.log(ev);
   }
 
   aceptar(){

@@ -35,17 +35,20 @@ export class RegistroPage implements OnInit {
   async register(){
   await this.presentLoading();
   console.log(this.mail, this.pass);
+  var tags = this.user.split(' ');
   const params = {
-    mail: this.mail,
-    password: this.pass,
+    tag: tags[0],
     name: this.user,
     lastname: this.last,
+    age: this.edad,
     gender: this.gender,
-    age: this.edad
+    mail: this.mail,
+    password: this.pass
   };
 
   this.userService.register(params).subscribe((res: any)=>{
-    if(res.message === undefined){
+    if(res.message === "Usuario agregado con exito a la DB."){
+      this.alertService.presentToast(res.message,'success',3000);
       this.navCtrl.navigateRoot('/categorias');
     }else{
       setTimeout(() => {
