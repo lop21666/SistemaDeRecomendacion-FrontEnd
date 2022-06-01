@@ -1,0 +1,55 @@
+<ion-content>
+  <div class="container">
+    <div class="header">
+    </div>
+    <ion-card class="body animate__animated animate__bounceInDown">
+      <div class="img">
+        <img src="../../assets/img/Logo Filmy.png" class="animate__animated animate__bounce">
+      </div>
+      <br>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+            <ion-input placeholder="Name" type="name" clearOnEdit="true" clearInput="true" [(ngModel)]="user">
+            </ion-input>
+          </ion-item>
+          <ion-item mode="md">
+            <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+            <ion-input placeholder="Lastname" type="name" clearOnEdit="true" clearInput="true" [(ngModel)]="last">
+            </ion-input>
+          </ion-item>
+          <ion-item mode="md">
+            <ion-icon slot="start" name="at-outline"></ion-icon>
+            <ion-input placeholder="Mail" type="mail" clearOnEdit="true" clearInput="true" [(ngModel)]="mail">
+            </ion-input>
+          </ion-item>
+          <ion-item mode="md">
+            <ion-icon slot="start" name="code-working-outline"></ion-icon>
+            <ion-input placeholder="Password" type="password" clearOnEdit="true" clearInput="true" [(ngModel)]="pass">
+            </ion-input>
+          </ion-item>
+          <ion-item mode="md">
+            <ion-icon slot="start" name="hourglass-outline"></ion-icon>
+            <ion-input placeholder="Years old" type="name" clearOnEdit="true" clearInput="true" [(ngModel)]="edad">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Gender</ion-label>
+            <ion-select placeholder="Select gender">
+              <ion-select-option value="F">Female</ion-select-option>
+              <ion-select-option value="M">Male</ion-select-option>
+            </ion-select>
+        </ion-item>
+        </ion-list>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" class="button-1" (click)="register()">Register
+                <ion-icon slot="start" color="white" name="enter-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-card>
+  </div>
+</ion-content>
