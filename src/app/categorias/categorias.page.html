@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" style="--color: white;">Atrás
+        <ion-icon slot="start" name="arrow-back-outline" style="color: white;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Géneros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br>
+  <ion-list>
+    <ion-list-header>Elige tus géneros favoritos</ion-list-header>
+    <ion-item *ngFor="let entry of generos">
+      <ion-label>{{entry.name}}</ion-label>
+      <ion-checkbox slot="end" (ionChange)="selectGenre($event)" color="secondary"></ion-checkbox>
+    </ion-item>
+    <ion-row>
+      <ion-col size="4"></ion-col>
+      <ion-col size="4">
+        <ion-button expand="block" shape="round" style="--background:#31afb4;">
+          Aceptar
+        </ion-button>
+      </ion-col>
+      <ion-col size="4"></ion-col>
+    </ion-row>
+  </ion-list>
+</ion-content>

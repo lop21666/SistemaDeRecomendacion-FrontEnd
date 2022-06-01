@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 
 const url = environment.url;
 const apiKey = environment.apiKey;
+const URL = 'https://localhost:3000';
 
 @Injectable({
   providedIn: 'root'
@@ -43,11 +44,16 @@ export class MoviesService {
     return this.ejecutarQuery<RespuestaCredits>(`/search/movie?&query=${clave}&page=1`);
   }
 
+  getGenres(){
+    return this.http.get(URL + '/getGenres');
+  }
+
   private ejecutarQuery<T>(query: string){
     query = url + query;
     query += `&api_key=${apiKey}&language=es&include_image_language=es`;
     console.log(query);
     return this.http.get<T>(query);
   }
+
 
 }

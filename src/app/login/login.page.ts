@@ -15,7 +15,8 @@ export class LoginPage implements OnInit {
   pass = '';
 
 
-  constructor(private navCtrl: NavController, private userService: UserService, public loadingController: LoadingController, private alertService:AlertService) {
+  constructor(private navCtrl: NavController, private userService: UserService, public loadingController: LoadingController,
+              private alertService:AlertService) {
               }
 
   ngOnInit() {}
@@ -36,14 +37,14 @@ export class LoginPage implements OnInit {
       password: this.pass
     };
 
-    this.userService.login(params).subscribe((res:any)=>{
-      if(res.message==undefined){
-        this.navCtrl.navigateRoot('/home');
+    this.userService.login(params).subscribe((res: any)=>{
+      if(res.message === undefined){
+        this.navCtrl.navigateRoot('/categorias');
       }else{
         setTimeout(() => {
           this.loadingController.dismiss();
         }, 500);
-        this.alertService.presentToast(res.message,"danger",3000);
+        this.alertService.presentToast(res.message,'danger',3000);
       }
     });
   }
