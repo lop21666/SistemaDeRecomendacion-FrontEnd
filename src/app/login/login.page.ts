@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
 
 
   constructor(private navCtrl: NavController, private userService: UserService, public loadingController: LoadingController,
-              private alertService:AlertService) {
+              private alertService: AlertService) {
               }
 
   ngOnInit() {}
