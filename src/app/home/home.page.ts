@@ -26,6 +26,10 @@ export class HomePage implements OnInit{
               private loadingController: LoadingController) {}
 
   ngOnInit() {
+    setTimeout(() => {
+      this.loadingController.dismiss();
+    }, 1000);
+
     this.moviesService.getFeature()
       .subscribe( resp => {
         console.log(resp);

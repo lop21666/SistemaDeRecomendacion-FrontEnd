@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NavController, LoadingController} from '@ionic/angular';
+import { AlertService } from '../services/services/alert.service';
 import { UserService } from '../services/services/user.service';
 
 @Component({
@@ -10,11 +11,11 @@ import { UserService } from '../services/services/user.service';
 })
 export class LoginPage implements OnInit {
 
-  user = '';
+  mail = '';
   pass = '';
 
 
-  constructor(private navCtrl: NavController, private userService: UserService, public loadingController: LoadingController) {
+  constructor(private navCtrl: NavController, private userService: UserService, public loadingController: LoadingController, private alertService:AlertService) {
               }
 
   ngOnInit() {}
@@ -28,9 +29,23 @@ export class LoginPage implements OnInit {
   }
 
   async login(){
-    this.presentLoading();
-    console.log(this.user, this.pass);
-    this.navCtrl.navigateRoot('/home');
+    await this.presentLoading();
+    console.log(this.mail, this.pass);
+    const params = {
+      mail: this.mail,
+      password: this.pass
+    };
+
+    this.userService.login(params).subscribe((res:any)=>{
+      if(res.message==undefined){
+        this.navCtrl.navigateRoot('/home');
+      }else{
+        setTimeout(() => {
+          this.loadingController.dismiss();
+        }, 500);
+        this.alertService.presentToast(res.message,"danger",3000);
+      }
+    });
   }
 
 }
