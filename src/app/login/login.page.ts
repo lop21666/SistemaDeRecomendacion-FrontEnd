@@ -3,6 +3,7 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NavController, LoadingController} from '@ionic/angular';
 import { AlertService } from '../services/services/alert.service';
 import { UserService } from '../services/services/user.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,20 @@ export class LoginPage implements OnInit {
 
 
   constructor(private navCtrl: NavController, private userService: UserService, public loadingController: LoadingController,
-              private alertService: AlertService) {
+              private alertService: AlertService, private storage: Storage) {
               }
 
   ngOnInit() {}
+
+
+  async datosLocalStorage(){
+    await this.storage.create();
+    await this.storage.clear();
+    const data = await {
+      mail: this.mail
+    };
+    await this.storage.set('datos', data);
+  }
 
 
   async presentLoading() {
@@ -37,9 +48,10 @@ export class LoginPage implements OnInit {
       password: this.pass
     };
 
-    this.userService.login(params).subscribe((res: any)=>{
+    this.userService.login(params).subscribe(async (res: any)=>{
       if(res.message === undefined){
-        this.navCtrl.navigateRoot('/home');
+        await this.datosLocalStorage();
+        await this.navCtrl.navigateRoot('/home');
       }else{
         setTimeout(() => {
           this.loadingController.dismiss();
