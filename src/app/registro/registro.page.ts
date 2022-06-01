@@ -58,6 +58,11 @@ export class RegistroPage implements OnInit {
 
   select(ev){
     this.gender = ev.detail.value;
+    console.log(ev.detail.value);
+  }
+
+  goLogin(){
+    this.navCtrl.navigateForward('/login');
   }
 
 }

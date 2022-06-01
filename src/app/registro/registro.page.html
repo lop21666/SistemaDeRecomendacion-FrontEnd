@@ -2,7 +2,7 @@
   <div class="container">
     <div class="header">
     </div>
-    <ion-card class="body animate__animated animate__bounceInDown">
+    <ion-card class="body animate__animated animate__bounceInDown" style="    margin-top: -14px;">
       <div class="img">
         <img src="../../assets/img/Logo Filmy.png" class="animate__animated animate__bounce">
       </div>
@@ -35,7 +35,7 @@
           </ion-item>
           <ion-item>
             <ion-label>Gender</ion-label>
-            <ion-select placeholder="Select gender" (ionChange)="select($event)">
+            <ion-select placeholder="Select gender" (ionChange)="select($event)" color="dark">
               <ion-select-option value="F">Female</ion-select-option>
               <ion-select-option value="M">Male</ion-select-option>
             </ion-select>
@@ -50,6 +50,8 @@
             </ion-col>
           </ion-row>
         </ion-grid>
+        <br>
+        <p class="ion-text-center" style="margin-top: 15px; color: rgb(175, 174, 174); font-size: 16px;">¿Ya tienes cuenta?&nbsp;&nbsp;<a (click)="goLogin()" style="color: #03dada;">Inicia sesión</a></p>
     </ion-card>
   </div>
 </ion-content>
