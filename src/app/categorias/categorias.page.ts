@@ -10,10 +10,13 @@ import { MoviesService } from '../services/services/movies.service';
 export class CategoriasPage implements OnInit {
 
   generos;
+  datosUsuario = null;
 
-  constructor(private navCtrl: NavController, private moviesService: MoviesService, public loadingController: LoadingController) { }
+  constructor(private navCtrl: NavController, private moviesService: MoviesService, public loadingController: LoadingController,
+              private storage: Storage) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.datosUsuario = await this.storage.get('datos');
     setTimeout(() => {
       this.loadingController.dismiss();
     }, 1000);
@@ -28,7 +31,13 @@ export class CategoriasPage implements OnInit {
   }
 
   selectGenre(ev){
-    console.log(ev);
+    const email = this.datosUsuario.mail;
+    const params = {
+      mail: email,
+      genreName: ev
+    };
+
+    this.moviesService.inLikeGenre(params);
   }
 
   aceptar(){

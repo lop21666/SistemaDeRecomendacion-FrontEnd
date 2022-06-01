@@ -13,6 +13,8 @@
   <br>
   <ion-list>
     <ion-list-header>Elige tus géneros favoritos</ion-list-header>
+    <br>
+    <br>
     <ion-item *ngFor="let entry of generos">
       <ion-label>{{entry.name}}</ion-label>
       <ion-checkbox slot="end" (ionChange)="selectGenre(entry.name)" color="secondary"></ion-checkbox>
