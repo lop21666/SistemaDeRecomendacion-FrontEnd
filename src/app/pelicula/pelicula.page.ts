@@ -28,8 +28,9 @@ export class PeliculaPage implements OnInit {
       movieName: this.pelicula.original_title
     };
 
-    await this.moviesService.getLikeUserMovie(params).subscribe(resp =>{
-      if(resp === 'Pelicula con like de usuario.'){
+    await this.moviesService.getLikeUserMovie(params).subscribe((resp:any) =>{
+      console.log(resp);
+      if(resp.message === 'Pelicula con like de usuario.'){
         this.liked = true;
       }else{
         this.liked = false;

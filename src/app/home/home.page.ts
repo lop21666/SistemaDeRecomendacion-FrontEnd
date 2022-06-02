@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, LoadingController } from '@ionic/angular';
+import { ModalController, LoadingController, NavController } from '@ionic/angular';
 import { Pelicula } from '../interfaces/interfaces';
 import { MoviesService } from '../services/services/movies.service';
 import { PeliculaPage } from '../pelicula/pelicula.page';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,7 @@ export class HomePage implements OnInit{
   pelicularPopulares: Pelicula[] = [];
 
   constructor(private moviesService: MoviesService, private modalController: ModalController,
-              private loadingController: LoadingController) {}
+              private loadingController: LoadingController, private storage:Storage, private navController:NavController) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -50,6 +51,11 @@ export class HomePage implements OnInit{
 
   cargarMas() {
     this.getPopulares();
+  }
+
+  logout(){
+    this.storage.clear();
+    this.navController.navigateRoot('/login');
   }
 
   async presentModalPelicula(pelicula){
