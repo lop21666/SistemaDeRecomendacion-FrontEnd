@@ -4,7 +4,6 @@ import { GuardGuard } from './guards/guard.guard';
 
 const routes: Routes = [
   {
-    canActivate: [GuardGuard],
     path: '',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },

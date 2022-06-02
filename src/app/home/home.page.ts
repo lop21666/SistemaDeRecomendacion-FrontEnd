@@ -22,11 +22,15 @@ export class HomePage implements OnInit{
   };
   peliculasRecientes: Pelicula[] = [];
   pelicularPopulares: Pelicula[] = [];
+  peliculasRecomendadasGenero;
+  datosUsuario = null;
 
   constructor(private moviesService: MoviesService, private modalController: ModalController,
-              private loadingController: LoadingController, private storage:Storage, private navController:NavController) {}
+              private loadingController: LoadingController, private storage: Storage, private navController: NavController) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.datosUsuario = await this.storage.get('datos');
+    const email = await this.datosUsuario.mail;
     setTimeout(() => {
       this.loadingController.dismiss();
     }, 1000);
@@ -36,6 +40,16 @@ export class HomePage implements OnInit{
         console.log(resp);
         this.peliculasRecientes = resp.results;
       });
+
+      const params = await {
+        mail: email
+      };
+    this.moviesService.genreRecommendation(params).subscribe((resp: any)=>{
+      resp.forEach(element => {
+        const pelicula = this.moviesService.getDetallesPelicula(element.api_id.low);
+        this.peliculasRecomendadasGenero.push(pelicula);
+      });
+    });
 
     this.getPopulares();
   }
