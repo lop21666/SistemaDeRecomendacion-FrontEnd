@@ -12,29 +12,43 @@ export class PerfilPage implements OnInit {
 
   datosUsuario =  null;
   datosPerfil;
-  allowEdit = false;
+  allowEdit = true;
   edad;
   genero;
   pass;
+  email = null;
+  viewEntered = false;
 
   constructor(private userService: UserService, private storage: Storage, private navCtrl: NavController) { }
 
-  async ngOnInit() {
+  async ionViewWillEnter(){
+    await this.storage.create();
     this.datosUsuario = await this.storage.get('datos');
-    const email = await this.datosUsuario.mail;
-    const params = await {
-      mail: email
-    };
-    await this.userService.getPerfil(params).subscribe((resp: any)=>{
-      this.datosPerfil = resp;
-    });
-    this.edad = await this.datosPerfil.age.low;
-    this.genero = await this.datosPerfil.gender;
-    this.pass = await this.datosPerfil.password;
+    this.email = await this.datosUsuario.mail;
+    console.log(this.datosUsuario);
   }
 
+  async ngOnInit() {
+    setTimeout(async () => {
+      const params = await {
+        mail: this.email
+      };
+      await this.userService.getPerfil(params).subscribe(async (resp: any)=>{
+        this.datosPerfil = await resp;
+        this.edad = await this.datosPerfil.age.low;
+        this.genero = await this.datosPerfil.gender;
+        this.pass = await this.datosPerfil.password;
+      });
+    }, 1000);
+    
+    setTimeout(() => {
+      this.viewEntered = true;
+    }, 2000);
+  }
+  
+
   edit(){
-    this.allowEdit = true;
+    this.allowEdit = false;
   }
 
   back(){
@@ -56,7 +70,7 @@ export class PerfilPage implements OnInit {
       currentMail: email
     };
 
-    this.allowEdit = false;
+    this.allowEdit = true;
 
     this.userService.updateUser(params).subscribe((resp: any)=>{
       console.log(resp);

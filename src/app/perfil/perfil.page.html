@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="viewEntered">
   <ion-card class="animated-card animate__animated animate__fadeIn">
     <ion-card-header>
       <ion-img src="../../assets/img/fondoPerfil.jpg" style="border-radius: 10px;" class="img  animate__animated animate__fadeIn"></ion-img>
@@ -20,7 +20,7 @@
           <ion-col size="3"></ion-col>
           <ion-col size="6">
             <ion-avatar class="avatar">
-              <img src="../../assets/img/profile.jpg">
+              <img src="../../assets/img/logo-profile.jpg">
             </ion-avatar>
           </ion-col>
           <ion-col size="3">
@@ -60,8 +60,9 @@
             <ion-input placeholder="Edad" type="name" clearOnEdit="true" clearInput [(ngModel)]="edad" [disabled]="allowEdit">
             </ion-input>
           </ion-item>
+
+          <small>Género:*</small>
           <ion-item>
-            <ion-label>Género:*</ion-label>
             <ion-select placeholder="Select gender" (ionChange)="select($event)" color="dark" interface="popover" [disabled]="allowEdit" [value]="genero">
               <ion-select-option value="F">Female</ion-select-option>
               <ion-select-option value="M">Male</ion-select-option>
