@@ -30,7 +30,36 @@
     </ion-slides>
   </ion-card>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col size='0.5'>
+      </ion-col>
+      <ion-col>
+        <h3 style="font-family: muli; font-size: 27px; margin-bottom: -21px;margin-top: 30px;">Para ti</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card *ngIf="viewEntered">
+    <ion-slides [options]="slideOpts">
   
+      <ion-slide *ngFor="let pelicula of peliculasRecomendadasGenero" (click)="presentModalPelicula(pelicula)">
+        <ion-row>
+            <ion-card>
+              <img src='{{pelicula.poster_path | imagen}}' class="poster"/>
+            </ion-card>
+        </ion-row>
+      </ion-slide>
+    
+      <ion-slide class="slide-mas" (click)="cargarMas()">
+        <ion-button expand='full' size='full'  class="btn-mas">
+          <ion-icon name="add" slot="icon-only">
+          </ion-icon>
+        </ion-button>
+      </ion-slide>
+    
+    </ion-slides>
+  </ion-card>
 
   <ion-grid>
     <ion-row>
@@ -45,33 +74,6 @@
   <ion-card style="margin-top: -5px; margin-bottom: -15px;">
     <ion-slides [options] = 'slideOpts'>
       <ion-slide *ngFor="let pelicula of peliculasRecientes">
-        <ion-card (click)="presentModalPelicula(pelicula)">
-          <img src='{{pelicula.backdrop_path | imagen }}' />
-          <ion-card-content>
-            <ion-card-title style="font-size: 18px;">{{pelicula.title}}</ion-card-title>
-            <p>
-    
-            </p>
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
-  </ion-card>
-
-
-  <ion-grid>
-    <ion-row>
-      <ion-col size='0.5'>
-      </ion-col>
-      <ion-col>
-        <h3 style="font-family: muli; font-size: 27px;">Para ti</h3>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ion-card style="margin-top: -5px; margin-bottom: -15px;">
-    <ion-slides [options] = 'slideOpts'>
-      <ion-slide *ngFor="let pelicula of peliculasRecomendadasGenero">
         <ion-card (click)="presentModalPelicula(pelicula)">
           <img src='{{pelicula.backdrop_path | imagen }}' />
           <ion-card-content>

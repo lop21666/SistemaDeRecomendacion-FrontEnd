@@ -22,34 +22,52 @@ export class HomePage implements OnInit{
   };
   peliculasRecientes: Pelicula[] = [];
   pelicularPopulares: Pelicula[] = [];
-  peliculasRecomendadasGenero;
+  peliculasRecomendadasGenero = [];
   datosUsuario = null;
+  pelicula;
+  email = null;
+  viewEntered = false;
 
   constructor(private moviesService: MoviesService, private modalController: ModalController,
               private loadingController: LoadingController, private storage: Storage, private navController: NavController) {}
+  
+
+  async ionViewWillEnter(){
+    await this.storage.create();
+    this.datosUsuario = await this.storage.get('datos');
+    this.email = await this.datosUsuario.mail;
+  }
 
   async ngOnInit() {
-    this.datosUsuario = await this.storage.get('datos');
-    const email = await this.datosUsuario.mail;
-    setTimeout(() => {
+    setTimeout(async () => {
+      console.log(this.datosUsuario);
       this.loadingController.dismiss();
+      const params = await {
+        mail: this.email
+      };
+      await this.moviesService.genreRecommendation(params).subscribe(async (resp: any)=>{
+        this.pelicula = await resp;
+        await this.pelicula.forEach(async element => {
+          let pelicula=null;
+          await this.moviesService.getDetallesPelicula(element.api_id.low).subscribe(async (res)=>{
+            pelicula = await res;
+            console.log(pelicula);
+            await this.peliculasRecomendadasGenero.push(pelicula);
+          });
+        });
+      });
     }, 1000);
+
+    setTimeout(() => {
+      console.log(this.peliculasRecomendadasGenero);
+      this.viewEntered = true;
+    }, 2000);
 
     this.moviesService.getFeature()
       .subscribe( resp => {
         console.log(resp);
         this.peliculasRecientes = resp.results;
       });
-
-      const params = await {
-        mail: email
-      };
-    this.moviesService.genreRecommendation(params).subscribe((resp: any)=>{
-      resp.forEach(element => {
-        const pelicula = this.moviesService.getDetallesPelicula(element.api_id.low);
-        this.peliculasRecomendadasGenero.push(pelicula);
-      });
-    });
 
     this.getPopulares();
   }
