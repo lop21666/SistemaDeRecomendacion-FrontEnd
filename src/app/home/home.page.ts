@@ -48,7 +48,7 @@ export class HomePage implements OnInit{
         mail: this.email
       };
       await this.moviesService.genreRecommendation(this.params).subscribe(async (resp: any)=>{
-        if(resp.message != "Peliculas no encontradas."){
+        if(resp.message !== 'Peliculas no encontradas.'){
           this.pelicula = await resp;
           await this.pelicula.forEach(async element => {
             let pelicula=null;
@@ -70,7 +70,7 @@ export class HomePage implements OnInit{
       await this.moviesService.userRecommendation(this.params).subscribe(async (resp: any)=>{
         console.log(resp);
 
-        if(resp.message != "Peliculas no encontradas."){
+        if(resp.message !== 'Peliculas no encontradas.'){
           this.pelicula = await resp;
           await this.pelicula.forEach(async element => {
             let pelicula=null;

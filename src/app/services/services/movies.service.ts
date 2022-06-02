@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 const url = environment.url;
 const apiKey = environment.apiKey;
-const URL = 'http://192.168.1.20:3000';
+const URL = 'http://localhost:3000';
 
 @Injectable({
   providedIn: 'root'
