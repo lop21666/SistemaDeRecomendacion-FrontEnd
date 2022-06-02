@@ -85,9 +85,8 @@ export class PeliculaPage implements OnInit {
         });
       }else{
 
-        const tags = pelicula.original_title.split(' ');
         const param = {
-          tag: tags[0],
+          tag: 'pelicula',
           name: pelicula.original_title,
           // eslint-disable-next-line @typescript-eslint/naming-convention
           api_id: pelicula.id
