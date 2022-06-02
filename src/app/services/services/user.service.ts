@@ -29,4 +29,20 @@ export class UserService {
     return this.http.post(this.url + '/createUser', body,{headers});
   }
 
+  getPerfil<T>(params){
+    const headers = { 'content-type': 'application/json'};
+    const body=JSON.stringify(params);
+    console.log(body);
+
+    return this.http.post(this.url + '/profile', body,{headers});
+  }
+
+  updateUser<T>(params){
+    const headers = { 'content-type': 'application/json'};
+    const body=JSON.stringify(params);
+    console.log(body);
+
+    return this.http.post(this.url + '/updateUser', body,{headers});
+  }
+
 }
