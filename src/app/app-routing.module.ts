@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./pelicula/pelicula.module').then( m => m.PeliculaPageModule)
   },
   {
-    canActivate: [GuardGuard],
+    
     path: 'search',
     loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
   },
@@ -30,7 +30,7 @@ const routes: Routes = [
     path: 'categorias',
     loadChildren: () => import('./categorias/categorias.module').then( m => m.CategoriasPageModule)
   },{
-    canActivate: [GuardGuard],
+    
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   }

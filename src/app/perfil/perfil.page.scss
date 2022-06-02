@@ -35,5 +35,18 @@
   
   ion-list {
   padding-top: 2%;
+  background-color: transparent;
   }
+
+  .button-1{
+    --background:#31afb4;
+    }
+
+    .container {
+      text-align: center;
+      display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     
