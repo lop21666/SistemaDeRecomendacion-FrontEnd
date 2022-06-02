@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
 import { MoviesService } from '../services/services/movies.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-categorias',
@@ -30,18 +31,26 @@ export class CategoriasPage implements OnInit {
     this.navCtrl.back({animated: true});
   }
 
-  selectGenre(ev){
+  selectGenre(name,ev){
     const email = this.datosUsuario.mail;
     const params = {
       mail: email,
-      genreName: ev
+      genreName: name
     };
 
-    this.moviesService.inLikeGenre(params);
+    if(ev.detail.checked){
+      this.moviesService.inLikeGenre(params).subscribe((res:any)=>{
+        console.log(res);
+      });
+    }else{
+      this.moviesService.disLikeGenre(params).subscribe((res:any)=>{
+        console.log(res);
+      });
+    }
   }
 
   aceptar(){
-    this.navCtrl.navigateRoot('/home');
+    this.navCtrl.navigateRoot('/');
   }
 
 }

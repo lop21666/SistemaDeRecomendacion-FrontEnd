@@ -17,7 +17,7 @@
     <br>
     <ion-item *ngFor="let entry of generos">
       <ion-label>{{entry.name}}</ion-label>
-      <ion-checkbox slot="end" (ionChange)="selectGenre(entry.name)" color="secondary"></ion-checkbox>
+      <ion-checkbox slot="end" (ionChange)="selectGenre(entry.name,$event)" color="secondary"></ion-checkbox>
     </ion-item>
     <ion-row>
       <ion-col size="4"></ion-col>
