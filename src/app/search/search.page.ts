@@ -21,7 +21,7 @@ export class SearchPage implements OnInit {
   }
 
   back(){
-    this.navController.navigateBack('/home');
+    this.navController.navigateBack('/');
   }
 
   async search(){
