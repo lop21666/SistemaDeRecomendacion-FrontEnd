@@ -23,6 +23,7 @@ export class HomePage implements OnInit{
   peliculasRecientes: Pelicula[] = [];
   pelicularPopulares: Pelicula[] = [];
   peliculasRecomendadasGenero = [];
+  peliculasRecomendadasUser = [];
   datosUsuario = null;
   pelicula;
   email = null;
@@ -30,7 +31,7 @@ export class HomePage implements OnInit{
 
   constructor(private moviesService: MoviesService, private modalController: ModalController,
               private loadingController: LoadingController, private storage: Storage, private navController: NavController) {}
-  
+
 
   async ionViewWillEnter(){
     await this.storage.create();
@@ -53,6 +54,17 @@ export class HomePage implements OnInit{
             pelicula = await res;
             console.log(pelicula);
             await this.peliculasRecomendadasGenero.push(pelicula);
+          });
+        });
+      });
+      await this.moviesService.userRecommendation(params).subscribe(async (resp: any)=>{
+        this.pelicula = await resp;
+        await this.pelicula.forEach(async element => {
+          let pelicula=null;
+          await this.moviesService.getDetallesPelicula(element.api_id.low).subscribe(async (res)=>{
+            pelicula = await res;
+            console.log(pelicula);
+            await this.peliculasRecomendadasUser.push(pelicula);
           });
         });
       });

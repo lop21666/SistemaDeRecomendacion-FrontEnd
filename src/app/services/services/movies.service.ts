@@ -60,6 +60,14 @@ export class MoviesService {
     return this.http.post(URL + '/genreRecommendation', body,{headers});
   }
 
+  userRecommendation(params){
+    const headers = { 'content-type': 'application/json'};
+    const body=JSON.stringify(params);
+    console.log(body);
+
+    return this.http.post(URL + '/userRecommendation', body,{headers});
+  }
+
   inLikeGenre(params){
     const headers = { 'content-type': 'application/json'};
     const body=JSON.stringify(params);
