@@ -61,7 +61,7 @@ export class HomePage implements OnInit{
     setTimeout(() => {
       console.log(this.peliculasRecomendadasGenero);
       this.viewEntered = true;
-    }, 2000);
+    }, 2500);
 
     this.moviesService.getFeature()
       .subscribe( resp => {
