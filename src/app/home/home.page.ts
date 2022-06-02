@@ -28,6 +28,7 @@ export class HomePage implements OnInit{
   pelicula;
   email = null;
   viewEntered = false;
+  params = null;
 
   constructor(private moviesService: MoviesService, private modalController: ModalController,
               private loadingController: LoadingController, private storage: Storage, private navController: NavController) {}
@@ -43,32 +44,45 @@ export class HomePage implements OnInit{
     setTimeout(async () => {
       console.log(this.datosUsuario);
       this.loadingController.dismiss();
-      const params = await {
+      this.params = await {
         mail: this.email
       };
-      await this.moviesService.genreRecommendation(params).subscribe(async (resp: any)=>{
-        this.pelicula = await resp;
-        await this.pelicula.forEach(async element => {
-          let pelicula=null;
-          await this.moviesService.getDetallesPelicula(element.api_id.low).subscribe(async (res)=>{
-            pelicula = await res;
-            console.log(pelicula);
-            await this.peliculasRecomendadasGenero.push(pelicula);
+      await this.moviesService.genreRecommendation(this.params).subscribe(async (resp: any)=>{
+        if(resp.message != "Peliculas no encontradas."){
+          this.pelicula = await resp;
+          await this.pelicula.forEach(async element => {
+            let pelicula=null;
+            await this.moviesService.getDetallesPelicula(element.api_id.low).subscribe(async (res)=>{
+              pelicula = await res;
+              console.log(pelicula);
+              await this.peliculasRecomendadasGenero.push(pelicula);
+            });
           });
-        });
+        }
       });
-      await this.moviesService.userRecommendation(params).subscribe(async (resp: any)=>{
-        this.pelicula = await resp;
-        await this.pelicula.forEach(async element => {
-          let pelicula=null;
-          await this.moviesService.getDetallesPelicula(element.api_id.low).subscribe(async (res)=>{
-            pelicula = await res;
-            console.log(pelicula);
-            await this.peliculasRecomendadasUser.push(pelicula);
+    }, 2000);
+
+    setTimeout(async () => {
+      this.params = await {
+        mail: this.email
+      };
+
+      await this.moviesService.userRecommendation(this.params).subscribe(async (resp: any)=>{
+        console.log(resp);
+
+        if(resp.message != "Peliculas no encontradas."){
+          this.pelicula = await resp;
+          await this.pelicula.forEach(async element => {
+            let pelicula=null;
+            await this.moviesService.getDetallesPelicula(element.api_id.low).subscribe(async (res)=>{
+              pelicula = await res;
+              console.log(pelicula);
+              await this.peliculasRecomendadasUser.push(pelicula);
+            });
           });
-        });
+        }
       });
-    }, 1000);
+    }, 2500);
 
     setTimeout(() => {
       console.log(this.peliculasRecomendadasGenero);
