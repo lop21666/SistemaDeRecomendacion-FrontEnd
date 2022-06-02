@@ -93,6 +93,14 @@ export class MoviesService {
     return this.http.post(URL + '/createMovie', body,{headers});
   }
 
+  getLikeUserMovie(params){
+    const headers = { 'content-type': 'application/json'};
+    const body=JSON.stringify(params);
+    console.log(body);
+
+    return this.http.post(URL + '/getLikeUserMovie', body,{headers});
+  }
+
   private ejecutarQuery<T>(query: string){
     query = url + query;
     query += `&api_key=${apiKey}&language=es&include_image_language=es`;

@@ -13,15 +13,31 @@ export class PeliculaPage implements OnInit {
   @Input() pelicula;
   viewEntered = false;
 
-  liked = false;
+  liked;
   movies;
   exist = false;
   datosUsuario = null;
 
   constructor(private modalController: ModalController, private moviesService: MoviesService, private storage: Storage) { }
 
-  async ngOnInit() {
+  async ionViewWillEnter(){
     this.datosUsuario = await this.storage.get('datos');
+    const email = await this.datosUsuario.mail;
+    const params = await {
+      mail: email,
+      movieName: this.pelicula.original_title
+    };
+
+    await this.moviesService.getLikeUserMovie(params).subscribe(resp =>{
+      if(resp === 'Pelicula con like de usuario.'){
+        this.liked = true;
+      }else{
+        this.liked = false;
+      }
+    });
+  }
+
+  async ngOnInit() {
     console.log(this.pelicula);
     this.moviesService.getMovies().subscribe(resp =>{
       this.movies = resp;
@@ -61,13 +77,13 @@ export class PeliculaPage implements OnInit {
           this.exist = await true;
         }
       });
-  
+
       if(this.exist){
         this.moviesService.inLikeMovie(params).subscribe((res: any)=>{
           console.log(res);
         });
       }else{
-  
+
         const tags = pelicula.original_title.split(' ');
         const param = {
           tag: tags[0],
@@ -75,19 +91,19 @@ export class PeliculaPage implements OnInit {
           // eslint-disable-next-line @typescript-eslint/naming-convention
           api_id: pelicula.id
         };
-  
+
         this.moviesService.createMovie(param).subscribe((res: any)=>{
           if(res){
             console.log(res);
             this.moviesService.inLikeMovie(params).subscribe((resp: any)=>{
               console.log(resp);
-              this.moviesService.getMovies().subscribe(resp =>{
-                this.movies = resp;
+              this.moviesService.getMovies().subscribe(response =>{
+                this.movies = response;
               });
             });
           }
         });
-  
+
       }
     }
 
