@@ -28,7 +28,6 @@
     font-size: 32px;
     font-weight: 600;
     margin-bottom: 15px;
-    color: #333;
   }
   h4 {
     font-size: 13px;
@@ -40,19 +39,9 @@
     font-size: 16px;
     line-height: 26px;
     margin-bottom: 20px;
-    color: #666;
-  }
-  
-  ion-icon {
-      color: rgb(37, 130, 170);
-  }
-  
-  ion-input {
-      --color: black;
   }
   
   ion-list {
-      background-color: #FFF;
       padding-top: 7%;
   }
   
@@ -62,11 +51,6 @@
     border-radius: 14px;
     margin-bottom: 10px;
     margin-top: 10px;
-  }
-  
-  ion-toolbar {
-    --background: #66615B;
-    --color: white;
   }
   
   .item-skeleton{
@@ -111,10 +95,6 @@
   
   .margin-top-menos{
     margin-top: -20px;
-  }
-  
-  ion-content{
-    --background: #F4F3EF;
   }
   
   .fotoPerfil{
