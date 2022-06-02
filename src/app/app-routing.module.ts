@@ -29,7 +29,11 @@ const routes: Routes = [
     canActivate: [GuardGuard],
     path: 'categorias',
     loadChildren: () => import('./categorias/categorias.module').then( m => m.CategoriasPageModule)
-  },
+  },{
+    canActivate: [GuardGuard],
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  }
 ];
 
 @NgModule({
