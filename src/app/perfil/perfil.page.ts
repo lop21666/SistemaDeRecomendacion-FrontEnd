@@ -40,12 +40,12 @@ export class PerfilPage implements OnInit {
         this.pass = await this.datosPerfil.password;
       });
     }, 1000);
-    
+
     setTimeout(() => {
       this.viewEntered = true;
     }, 2000);
   }
-  
+
 
   edit(){
     this.allowEdit = false;
