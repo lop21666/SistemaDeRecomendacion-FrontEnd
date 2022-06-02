@@ -51,7 +51,7 @@ export class LoginPage implements OnInit {
     this.userService.login(params).subscribe(async (res: any)=>{
       if(res.message === undefined){
         await this.datosLocalStorage();
-        await this.navCtrl.navigateRoot('/home');
+        await this.navCtrl.navigateRoot('/');
       }else{
         setTimeout(() => {
           this.loadingController.dismiss();
