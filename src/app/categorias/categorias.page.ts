@@ -39,11 +39,11 @@ export class CategoriasPage implements OnInit {
     };
 
     if(ev.detail.checked){
-      this.moviesService.inLikeGenre(params).subscribe((res:any)=>{
+      this.moviesService.inLikeGenre(params).subscribe((res: any)=>{
         console.log(res);
       });
     }else{
-      this.moviesService.disLikeGenre(params).subscribe((res:any)=>{
+      this.moviesService.disLikeGenre(params).subscribe((res: any)=>{
         console.log(res);
       });
     }

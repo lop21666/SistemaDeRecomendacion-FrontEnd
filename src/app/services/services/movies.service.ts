@@ -48,6 +48,11 @@ export class MoviesService {
     return this.http.get(URL + '/getGenres');
   }
 
+  getMovies(){
+    return this.http.get(URL + '/getMovies');
+  }
+
+
   inLikeGenre(params){
     const headers = { 'content-type': 'application/json'};
     const body=JSON.stringify(params);
@@ -62,6 +67,22 @@ export class MoviesService {
     console.log(body);
 
     return this.http.post(URL + '/disLikeGenre', body,{headers});
+  }
+
+  inLikeMovie(params){
+    const headers = { 'content-type': 'application/json'};
+    const body=JSON.stringify(params);
+    console.log(body);
+
+    return this.http.post(URL + '/inLikeMovie', body,{headers});
+  }
+
+  createMovie(params){
+    const headers = { 'content-type': 'application/json'};
+    const body=JSON.stringify(params);
+    console.log(body);
+
+    return this.http.post(URL + '/createMovie', body,{headers});
   }
 
   private ejecutarQuery<T>(query: string){
